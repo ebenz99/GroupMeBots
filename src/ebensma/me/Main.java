@@ -1,6 +1,11 @@
 package ebensma.me;
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
+import org.json.simple.JSONObject;
 
 public class Main {
 
@@ -18,8 +23,27 @@ public class Main {
         return prop;
     }
 
-    public static void auth(){
-        //https://oauth.groupme.com/oauth/authorize?client_id=+clientid
-        int a = 1;
+    public static String createJSON(String id, String message){
+        /*JSONObject obj = new JSONObject();
+        obj.put("bot_id", id);
+        obj.put("text", message);
+        return obj;*/
+        return ("id:" + id + "&text:"+message);
+    }
+
+    public static boolean sendMessage(String url, String params) throws IOException {
+        String urlParameters = params;
+        byte[] postData = urlParameters.getBytes(StandardCharsets.UTF_8);
+        URL myurl = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) myurl.openConnection();
+
+    }
+
+    public static String request(String access_token) throws IOException {
+        String url = "https://localhost/?access_token=" + access_token;
+        URL myurl = new URL(url);
+        HttpsURLConnection con = (HttpsURLConnection) myurl.openConnection();
+        con.setRequestMethod("GET");
+        return "hello";
     }
 }
